@@ -201,6 +201,17 @@
           <artifactId>drill-gis</artifactId>
           <version>${project.version}</version>
         </dependency>
+        <dependency>
+          <groupId>org.apache.drill.contrib</groupId>
+          <artifactId>drill-storage-cassandra</artifactId>
+          <version>${project.version}</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.apache.hadoop</groupId>
+                  <artifactId>hadoop-core</artifactId>
+              </exclusion>
+          </exclusions>
+        </dependency>
       </dependencies>
     </profile>
 

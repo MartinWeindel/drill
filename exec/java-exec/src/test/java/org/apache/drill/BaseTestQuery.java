@@ -473,8 +473,10 @@ public class BaseTestQuery extends ExecTest {
     int rowCount = 0;
     final RecordBatchLoader loader = new RecordBatchLoader(getAllocator());
     for(final QueryDataBatch result : results) {
-      rowCount += result.getHeader().getRowCount();
-      loader.load(result.getHeader().getDef(), result.getData());
+      if (result.hasData()) {
+        rowCount += result.getHeader().getRowCount();
+        loader.load(result.getHeader().getDef(), result.getData());
+      }
       // TODO:  Clean:  DRILL-2933:  That load(...) no longer throws
       // SchemaChangeException, so check/clean throw clause above.
       VectorUtil.showVectorAccessibleContent(loader, columnWidths);
